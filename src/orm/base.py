@@ -19,8 +19,8 @@ from psycopg.sql import (
     Placeholder,
 )
 
-PG_DB = os.environ.get("PG_DB", "postgres")
-PG_USER = os.environ.get("PG_USER", "postgres")
+PG_DB = os.environ.get("PG_DB", "metrics_db")
+PG_USER = os.environ.get("PG_USER", "metrics_user")
 PG_HOST = os.environ.get("PG_HOST", "localhost")
 PG_PASSWORD = os.environ.get("PG_PASSWORD", "postgres")
 

@@ -155,9 +155,10 @@ async def post_init(application: Application) -> None:
     print(await application.bot.get_me())
 
     for _, chat_data in application.chat_data.items():
-        ud: UserData = chat_data[USER_DATA_KEY]
-        # ud.db_cache.reload_all()
-        ud.db_cache = UserDBCache()
+        if USER_DATA_KEY in chat_data:
+            ud: UserData = chat_data[USER_DATA_KEY]
+            # ud.db_cache.reload_all()
+            ud.db_cache = UserDBCache()
 
     commands_names_desc = [(x.name, x.description) for x in TgCommands.values_list()]
     await application.bot.set_my_commands(commands_names_desc)

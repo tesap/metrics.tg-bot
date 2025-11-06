@@ -1,8 +1,8 @@
 psycopg~=3.1.8
 python-telegram-bot>=20.0
-pandas~=1.5.3
+pandas
 tabulate
-pillow~=9.4.0
+pillow
 icalendar~=5.0.4
 pytz
 
@@ -17,4 +17,4 @@ mypy
 bandit
 
 sqlparse~=0.4.3
-numpy~=1.24.2
+numpy~=1.26.3

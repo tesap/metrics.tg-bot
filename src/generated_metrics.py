@@ -30,11 +30,13 @@ SLEEP_DEFAULT_KWARGS = {
 }
 
 # TODO weird constants
-AT_BED_EVENT_PK = 47
-AT_BED_NAME = "at bed"
+# AT_BED_EVENT_PK = 47
+# AT_BED_NAME = "at bed"
 
-SLEEP_EVENT_PK = 48
-SLEEP_NAME = "sleep"
+# SLEEP_EVENT_PK = 48
+EVENT_SLEEP_NAME = "sleep"
+# EVENT_SLEEP_END_NAME = "sleep_end"
+EVENT_GEN_SLEEP_NAME = "sleep[gen]"
 
 logger = logging.getLogger(__name__)
 
@@ -246,29 +248,29 @@ def build_last_occurrence_metric(**kwargs) -> GeneratedMetricEvent:
 # TODO Think of moving to 'generated_metric' DB table
 class GeneratedMetricsEnum(MyEnum):
     SLEEP_START = build_first_occurrence_metric(
-        target_event_id=SLEEP_EVENT_PK, name=SLEEP_NAME, **SLEEP_DEFAULT_KWARGS
+        target_event_name=EVENT_SLEEP_NAME, name=EVENT_GEN_SLEEP_NAME, **SLEEP_DEFAULT_KWARGS
     )
     SLEEP_END = build_last_occurrence_metric(
-        target_event_id=SLEEP_EVENT_PK, name=SLEEP_NAME, **SLEEP_DEFAULT_KWARGS
+        target_event_name=EVENT_SLEEP_NAME, name=EVENT_GEN_SLEEP_NAME, **SLEEP_DEFAULT_KWARGS
     )
 
     SLEEP_DURATION = CumulativeDurationGenMetric(
-        target_event_id=SLEEP_EVENT_PK, name=SLEEP_NAME, **SLEEP_DEFAULT_KWARGS
+        target_event_name=EVENT_SLEEP_NAME, name=EVENT_GEN_SLEEP_NAME, **SLEEP_DEFAULT_KWARGS
     )
 
-    AT_BED_START = build_first_occurrence_metric(
-        target_event_id=AT_BED_EVENT_PK, name=AT_BED_NAME, **SLEEP_DEFAULT_KWARGS
-    )
-    AT_BED_END = build_last_occurrence_metric(
-        target_event_id=AT_BED_EVENT_PK, name=AT_BED_NAME, **SLEEP_DEFAULT_KWARGS
-    )
-
-    AT_BED_DURATION = CumulativeDurationGenMetric(
-        target_event_id=AT_BED_EVENT_PK, name=AT_BED_NAME, **SLEEP_DEFAULT_KWARGS
-    )
+    # AT_BED_START = build_first_occurrence_metric(
+    #     target_event_id=AT_BED_EVENT_PK, name=AT_BED_NAME, **SLEEP_DEFAULT_KWARGS
+    # )
+    # AT_BED_END = build_last_occurrence_metric(
+    #     target_event_id=AT_BED_EVENT_PK, name=AT_BED_NAME, **SLEEP_DEFAULT_KWARGS
+    # )
+    #
+    # AT_BED_DURATION = CumulativeDurationGenMetric(
+    #     target_event_id=AT_BED_EVENT_PK, name=AT_BED_NAME, **SLEEP_DEFAULT_KWARGS
+    # )
 
     # KESHIY_SUM = SumIntAnswersGenMetric(target_event_id=7, name="keshiuy")
-    SLEEP_START_WASTE = MetricsDifference("sleep [waste]", [SLEEP_START, AT_BED_START])
+    # SLEEP_START_WASTE = MetricsDifference("sleep [waste]", [SLEEP_START, AT_BED_START])
 
 
 def format_metric_value(metric: MetricType, metric_value: Any) -> str | None:

@@ -19,6 +19,7 @@ CREATE TABLE tg_user (
     user_id SERIAL PRIMARY KEY
 );
 
+-- ## Moved to code entity
 -- CREATE TABLE question_type (
 --     pk SERIAL PRIMARY KEY,
 --     name VARCHAR(50) UNIQUE NOT NULL,
@@ -99,3 +100,24 @@ CREATE TABLE answer (
         = 1
     )
 );
+
+
+-- TODO Merge question into 'answer' table, make it an event without time from the DB perspective,
+-- while leaving ask frontend the same.
+-- TODO Make question a generated entity in image dynamically
+-- TODO Add 'fulltext' to event.
+
+INSERT INTO question (name, type_id, choices_list)
+VALUES 
+    -- ('is_holiday', 2, '{}'),
+    ('gym_training', 2, '{}'),
+    ('pray_mourning', 2, '{}'),
+    ('pray_evening', 2, '{}');
+
+INSERT INTO event (name, type)
+VALUES 
+    ('went_to_office', 'Durable'),
+    ('went_to_university', 'Durable'),
+    ('sleep', 'Durable'),
+    ('fail', 'Single'),
+    ('meal', 'Single');

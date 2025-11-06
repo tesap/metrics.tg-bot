@@ -422,12 +422,14 @@ async def on_event_datetime_answered(update: Update, context: ContextTypes.DEFAU
 
         answer_datetime = get_now() + res_timedelta
     else:
+        # Trying to parse isoformat string ("10:00:00")
         try:
             answer_datetime = datetime.datetime.combine(
                 date=get_now().date(), time=datetime.time.fromisoformat(text)
             )
         except ValueError:
             try:
+                # Trying to parse ISO 8601 format ("2022-10-10T10:00:00")
                 answer_datetime = datetime.datetime.fromisoformat(text)
             except ValueError:
                 await update.message.reply_text(
