@@ -102,22 +102,22 @@ CREATE TABLE answer (
 );
 
 
--- TODO Merge question into 'answer' table, make it an event without time from the DB perspective,
+-- TODO Merge question into 'event' table, make it an event without time from the DB perspective,
 -- while leaving ask frontend the same.
 -- TODO Make question a generated entity in image dynamically
 -- TODO Add 'fulltext' to event.
 
 INSERT INTO question (name, type_id, choices_list)
 VALUES 
-    -- ('is_holiday', 2, '{}'),
     ('gym_training', 2, '{}'),
     ('pray_mourning', 2, '{}'),
-    ('pray_evening', 2, '{}');
+    ('pray_evening', 2, '{}'),
+    ('fasting', 2, '{}'),
+    ('sleep_discipline', 2, '{}'),
+    ('work_location', 0, '{"Home", "Office", "University", "City library"}'),
+    ('univ_study_discipline', 2, '{}');
+
 
 INSERT INTO event (name, type)
 VALUES 
-    ('went_to_office', 'Durable'),
-    ('went_to_university', 'Durable'),
-    ('sleep', 'Durable'),
-    ('fail', 'Single'),
-    ('meal', 'Single');
+    ('fail', 'Single');
